@@ -13,8 +13,8 @@ const routes: Routes = [
   },
 
   {
-    path: 'song/:id',
-    loadChildren: () => import('./song/song.module').then( m => m.SongPageModule)
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'player/:id',

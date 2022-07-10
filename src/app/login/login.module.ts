@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SongPageRoutingModule } from './song-routing.module';
+import { LoginPageRoutingModule } from './login-routing.module';
 
-import { SongPage } from './song.page';
+import { LoginPage } from './login.page';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -13,10 +13,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     IonicModule,
-    SongPageRoutingModule,
+    LoginPageRoutingModule,
     ReactiveFormsModule,
     FormsModule
   ],
-  declarations: [SongPage]
+  declarations: [LoginPage]
 })
-export class SongPageModule {}
+export class LoginPageModule {}
