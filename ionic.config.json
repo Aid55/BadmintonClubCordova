@@ -1,0 +1,7 @@
+{
+  "name": "BadmintonClubCordova",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
