@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { HomePage } from './home.page';
 
-import { HomePageRoutingModule } from './home-routing.module';
+import { IonicModule } from '@ionic/angular';
+
+import { SongPageRoutingModule } from './song-routing.module';
+
+import { SongPage } from './song.page';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -11,10 +13,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,
+    SongPageRoutingModule,
     ReactiveFormsModule,
     FormsModule
   ],
-  declarations: [HomePage]
+  declarations: [SongPage]
 })
-export class HomePageModule {}
+export class SongPageModule {}
