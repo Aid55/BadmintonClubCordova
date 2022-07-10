@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { Song } from './song';
+import { Player } from './player';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
@@ -11,7 +11,7 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 })
 export class DbService {
   private storage: SQLiteObject;
-  songsList = new BehaviorSubject([]);
+  playersList = new BehaviorSubject([]);
   private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
   constructor(
     private platform: Platform, 
@@ -21,7 +21,7 @@ export class DbService {
   ) {
     this.platform.ready().then(() => {
       this.sqlite.create({
-        name: 'positronx_db.db',
+        name: 'club_db.db',
         location: 'default'
       })
       .then((db: SQLiteObject) => {
@@ -34,8 +34,8 @@ export class DbService {
     return this.isDbReady.asObservable();
   }
  
-  fetchSongs(): Observable<Song[]> {
-    return this.songsList.asObservable();
+  fetchPlayers(): Observable<Player[]> {
+    return this.playersList.asObservable();
   }
     // Render fake data
     getFakeData() {
@@ -45,60 +45,62 @@ export class DbService {
       ).subscribe(data => {
         this.sqlPorter.importSqlToDb(this.storage, data)
           .then(_ => {
-            this.getSongs();
+            this.getPlayers();
             this.isDbReady.next(true);
           })
           .catch(error => console.error(error));
       });
     }
   // Get list
-  getSongs(){
-    return this.storage.executeSql('SELECT * FROM songtable', []).then(res => {
-      let items: Song[] = [];
+  getPlayers(){
+    return this.storage.executeSql('SELECT * FROM playerstable', []).then(res => {
+      let items: Player[] = [];
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) { 
           items.push({ 
             id: res.rows.item(i).id,
-            artist_name: res.rows.item(i).artist_name,  
-            song_name: res.rows.item(i).song_name
+            first_name: res.rows.item(i).first_name,  
+            last_name: res.rows.item(i).last_name,
+            ability_level: res.rows.item(i).ability_level
            });
         }
       }
-      this.songsList.next(items);
+      this.playersList.next(items);
     });
   }
   // Add
-  addSong(artist_name, song_name) {
-    let data = [artist_name, song_name];
-    return this.storage.executeSql('INSERT INTO songtable (artist_name, song_name) VALUES (?, ?)', data)
+  addPlayer(first_name, last_name, ability_level) {
+    let data = [first_name, last_name, ability_level];
+    return this.storage.executeSql('INSERT INTO playerstable (first_name, last_name, ability_level) VALUES (?, ?, ?)', data)
     .then(res => {
-      this.getSongs();
+      this.getPlayers();
     });
   }
  
   // Get single object
-  getSong(id): Promise<Song> {
-    return this.storage.executeSql('SELECT * FROM songtable WHERE id = ?', [id]).then(res => { 
+  getPlayer(id): Promise<Player> {
+    return this.storage.executeSql('SELECT * FROM playerstable WHERE id = ?', [id]).then(res => { 
       return {
         id: res.rows.item(0).id,
-        artist_name: res.rows.item(0).artist_name,  
-        song_name: res.rows.item(0).song_name
+        first_name: res.rows.item(0).first_name,  
+        last_name: res.rows.item(0).last_name,
+        ability_level: res.rows.item(0).ability_level
       }
     });
   }
   // Update
-  updateSong(id, song: Song) {
-    let data = [song.artist_name, song.song_name];
-    return this.storage.executeSql(`UPDATE songtable SET artist_name = ?, song_name = ? WHERE id = ${id}`, data)
+  updatePlayer(id, player: Player) {
+    let data = [player.first_name, player.last_name, player.ability_level];
+    return this.storage.executeSql(`UPDATE playerstable SET first_name = ?, last_name = ?, ability_level = ? WHERE id = ${id}`, data)
     .then(data => {
-      this.getSongs();
+      this.getPlayers();
     })
   }
   // Delete
-  deleteSong(id) {
-    return this.storage.executeSql('DELETE FROM songtable WHERE id = ?', [id])
+  deletePlayer(id) {
+    return this.storage.executeSql('DELETE FROM playerstable WHERE id = ?', [id])
     .then(_ => {
-      this.getSongs();
+      this.getPlayers();
     });
   }
 }

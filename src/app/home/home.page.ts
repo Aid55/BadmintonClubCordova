@@ -22,28 +22,31 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.db.dbState().subscribe((res) => {
       if(res){
-        this.db.fetchSongs().subscribe(item => {
+        this.db.fetchPlayers().subscribe(item => {
           this.Data = item
         })
       }
     });
     this.mainForm = this.formBuilder.group({
-      artist: [''],
-      song: ['']
+      first_name: [''],
+      last_name: [''],
+      ability_level: ['']
     })
   }
   storeData() {
-    this.db.addSong(
-      this.mainForm.value.artist,
-      this.mainForm.value.song
+    this.db.addPlayer(
+      this.mainForm.value.first_name,
+      this.mainForm.value.last_name,
+      this.mainForm.value.ability_level
+
     ).then((res) => {
       this.mainForm.reset();
     })
   }
-  deleteSong(id){
-    this.db.deleteSong(id).then(async(res) => {
+  deletePlayer(id){
+    this.db.deletePlayer(id).then(async(res) => {
       let toast = await this.toast.create({
-        message: 'Song deleted',
+        message: 'Player deleted',
         duration: 2500
       });
       toast.present();      

@@ -1,11 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Players</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Player</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <ion-list lines="full">
-    <form [formGroup]="mainForm" (ngSubmit)="storeData()">
+    <form [formGroup]="editForm" (ngSubmit)="saveForm()">
       <ion-item>
         <ion-label position="floating">First name</ion-label>
         <ion-input formControlName="first_name" type="text" required></ion-input>
@@ -19,30 +22,15 @@
         <ion-label position="floating">Ability level</ion-label>
         <ion-input formControlName="ability_level" type="text" required>
         </ion-input>
-      </ion-item>        
+      </ion-item>
+   
       <ion-row>
         <ion-col>
           <ion-button type="submit" color="primary" shape="full" expand="block">
-            Add Player
+            Update
           </ion-button>
         </ion-col>
       </ion-row>
     </form>
-  </ion-list>
-    <ion-list>
-    <ion-list-header>
-      Players
-    </ion-list-header>
-    <ion-item lines="inset" *ngFor="let data of Data">
-      <ion-label>
-        <h5>{{data.first_name}}</h5>
-        <h5>{{data.last_name}}</h5>
-        <p>{{data.ability_level}}</p>
-      </ion-label>
-      <div class="item-note" item-end>
-        <ion-icon name="create" style="zoom:2.0" [routerLink]="['/player/', data.id]"></ion-icon>        
-        <ion-icon name="trash" style="zoom:2.0" (click)="deletePlayer(data.id)"></ion-icon>
-      </div>
-    </ion-item>
   </ion-list>
 </ion-content>
