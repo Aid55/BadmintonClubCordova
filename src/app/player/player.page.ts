@@ -37,7 +37,7 @@ export class PlayerPage implements OnInit {
     this.db.updatePlayer(this.id, this.editForm.value)
     .then( (res) => {
       console.log(res)
-      this.router.navigate(['/home']);
+      this.router.navigate(['/players']);
     })
   }
 }

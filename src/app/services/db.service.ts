@@ -20,6 +20,10 @@ export class DbService {
     private sqlPorter: SQLitePorter,
   ) {
     this.platform.ready().then(() => {
+      this.sqlite.deleteDatabase({
+        name: 'club_db.db',
+        location: 'default'
+      })
       this.sqlite.create({
         name: 'club_db.db',
         location: 'default'
@@ -102,5 +106,9 @@ export class DbService {
     .then(_ => {
       this.getPlayers();
     });
+  }
+
+  checkLogin(username){
+    return this.storage.executeSql('SELECT * FROM credentialstable WHERE username = ?', [username]);
   }
 }

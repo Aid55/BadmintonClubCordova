@@ -5,11 +5,11 @@ import { DbService } from './../services/db.service';
 import { ToastController } from '@ionic/angular';
 import { Router } from "@angular/router";
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-players',
+  templateUrl: 'players.page.html',
+  styleUrls: ['players.page.scss'],
 })
-export class HomePage implements OnInit {
+export class PlayersPage implements OnInit {
   mainForm: FormGroup;
   Data: any[] = []
   constructor(

@@ -5,6 +5,12 @@ CREATE TABLE IF NOT EXISTS playerstable(
     ability_level TEXT NOT NULL    
 );
 INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (1, "Aidan", "Batchelor", "Medium");
-INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (1, "Naomi", "Smith", "Medium");
-INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (1, "Joe", "Bloggs", "High");
-INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (1, "Jane", "Doe", "Low");
+INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (2, "Naomi", "Smith", "Medium");
+INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (3, "Joe", "Bloggs", "High");
+INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (4, "Jane", "Doe", "Low");
+
+CREATE TABLE IF NOT EXISTS credentialstable(
+    username TEXT NOT NULL,
+    password TEXT NOT NULL
+);
+INSERT or IGNORE INTO credentialstable(username, password) VALUES ("aidan", "password");

@@ -3,12 +3,13 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\home",
     "\\src\\app\\login",
     "\\src\\app\\player",
+    "\\src\\app\\players",
     "\\src\\app\\services",
-    "\\src\\assets"
+    "\\src\\assets",
+    "\\src\\assets\\icon"
   ],
-  "SelectedNode": "\\src\\app\\login",
+  "SelectedNode": "\\src\\app\\login\\login.page.ts",
   "PreviewInSolutionExplorer": false
 }
