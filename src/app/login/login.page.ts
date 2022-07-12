@@ -28,15 +28,22 @@ export class LoginPage implements OnInit {
   }
   checkLogin(){
     let passCheck = this.db.checkLogin(this.loginForm.value.username);
-    console.log(passCheck);
+    //console.log(passCheck);
     passCheck.then(data => {
-      if(data.rows.item(0).password == this.loginForm.value.password){
-        console.log('matched');
-        this.router.navigate(['/players']);
+      //console.log(data.rows.length);
+      if(data.rows.length != 0){
+        if(data.rows.item(0).password == this.loginForm.value.password){
+          console.log('password matched');
+          this.router.navigate(['/players']);
+        }
+        else{
+          console.log('password not matched');
+          document.querySelector('#validationText').innerHTML = "Incorrect Password";
+        }
       }
       else{
-        console.log('no match');
-        document.querySelector('#validationText').innerHTML = "Incorrect Password";
+        console.log('Username not found in database');
+        document.querySelector('#validationText').innerHTML = "Username does not exist";
       }
     });
   }
