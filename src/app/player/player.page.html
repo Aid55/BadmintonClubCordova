@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Edit Player</ion-title>
+    <ion-title class="ion-text-center">Edit Player</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -20,8 +20,9 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">Ability level</ion-label>
-        <ion-input formControlName="ability_level" type="text" required>
-        </ion-input>
+        <ion-select placeholder="Select an ability level" formControlName="ability_level" class="form-control" required>
+          <ion-select-option *ngFor="let level of abilityLevels">{{level}}</ion-select-option>
+        </ion-select>
       </ion-item>
    
       <ion-row>

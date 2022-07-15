@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Players</ion-title>
+    <ion-title class="ion-text-center">Players</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -12,14 +12,14 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">Last name</ion-label>
-        <ion-input formControlName="last_name" type="text" required>
-        </ion-input>
+        <ion-input formControlName="last_name" type="text" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Ability level</ion-label>
-        <ion-input formControlName="ability_level" type="text" required>
-        </ion-input>
-      </ion-item>        
+        <ion-select placeholder="Select an ability level" formControlName="ability_level" class="form-control" required>
+          <ion-select-option *ngFor="let level of abilityLevels">{{level}}</ion-select-option>
+        </ion-select>
+      </ion-item>      
       <ion-row>
         <ion-col>
           <ion-button type="submit" color="primary" shape="full" expand="block">
