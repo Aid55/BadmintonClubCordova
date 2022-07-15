@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PlayerPageRoutingModule } from './player-routing.module';
+import { EditPlayerPageRoutingModule } from './editplayer-routing.module';
 
-import { PlayerPage } from './player.page';
+import { EditPlayerPage } from './editplayer.page';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -14,10 +14,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     IonicModule,
-    PlayerPageRoutingModule,
+    EditPlayerPageRoutingModule,
     ReactiveFormsModule,
     FormsModule
   ],
-  declarations: [PlayerPage]
+  declarations: [EditPlayerPage]
 })
-export class PlayerPageModule {}
+export class EditPlayerPageModule {}

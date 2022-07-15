@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from "@angular/forms";
-import { DbService } from './../services/db.service'
+import { DbService } from '../../services/db.service'
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-player',
-  templateUrl: './player.page.html',
-  styleUrls: ['./player.page.scss'],
+  selector: 'app-editplayer',
+  templateUrl: './editplayer.page.html',
+  styleUrls: ['./editplayer.page.scss'],
 })
-export class PlayerPage implements OnInit {
+export class EditPlayerPage implements OnInit {
   editForm: FormGroup;
   id: any;
   abilityLevels: any = ['High', 'Medium', 'Low'];

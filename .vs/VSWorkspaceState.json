@@ -3,13 +3,15 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\login",
-    "\\src\\app\\player",
-    "\\src\\app\\players",
-    "\\src\\app\\services",
+    "\\src\\app\\pages",
+    "\\src\\app\\pages\\editscore",
+    "\\src\\app\\pages\\home",
+    "\\src\\app\\pages\\leaderboard",
+    "\\src\\app\\pages\\matches",
+    "\\src\\app\\pages\\winners",
     "\\src\\assets",
     "\\src\\assets\\icon"
   ],
-  "SelectedNode": "\\src\\app\\player\\player.page.ts",
+  "SelectedNode": "\\src\\app\\pages\\editscore\\editscore.module.ts",
   "PreviewInSolutionExplorer": false
 }

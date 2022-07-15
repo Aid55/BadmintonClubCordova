@@ -15,13 +15,13 @@ export class AppComponent {
     this.navigation =
     [
       {
-        title : "Home",
-        url   : "/home",
-        icon  : "home"
+        title : "Login",
+        url   : "/login",
+        icon  : "login"
       },
       {
-        title : "Menu",
-        url   : "/menu",
+        title : "Home",
+        url   : "/home",
         icon  : "home"
       },
       {
