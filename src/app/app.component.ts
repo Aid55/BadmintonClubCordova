@@ -6,5 +6,44 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  navigation: any;
+  constructor() {
+    this.initSideMenuNavigation();
+  }
+
+  initSideMenuNavigation(){
+    this.navigation =
+    [
+      {
+        title : "Home",
+        url   : "/home",
+        icon  : "home"
+      },
+      {
+        title : "Menu",
+        url   : "/menu",
+        icon  : "home"
+      },
+      {
+        title : "Players",
+        url   : "/players",
+        icon  : "people-outline"
+      },
+      {
+        title : "Matches",
+        url   : "/matches",
+        icon  : "reader-outline"
+      },
+      {
+        title : "Leaderboard",
+        url   : "/leaderboard",
+        icon  : "podium-outline"
+      },
+      {
+        title : "Previous Winners",
+        url   : "/winners",
+        icon  : "trophy-outline"
+      },
+    ]
+  }
 }
