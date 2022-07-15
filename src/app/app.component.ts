@@ -17,12 +17,12 @@ export class AppComponent {
       {
         title : "Login",
         url   : "/login",
-        icon  : "login"
+        icon  : "log-in-outline"
       },
       {
         title : "Home",
         url   : "/home",
-        icon  : "home"
+        icon  : "home-outline"
       },
       {
         title : "Players",
