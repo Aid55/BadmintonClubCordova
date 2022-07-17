@@ -1,16 +1,16 @@
 
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder} from "@angular/forms";
 import { DbService } from '../../services/db.service';
 import { ToastController } from '@ionic/angular';
 import { Router } from "@angular/router";
 @Component({
   selector: 'app-players',
-  templateUrl: 'players.page.html',
-  styleUrls: ['players.page.scss'],
+  templateUrl: './players.page.html',
+  styleUrls: ['./players.page.scss'],
 })
 export class PlayersPage implements OnInit {
-  mainForm: FormGroup;
+  addPlayerForm: FormGroup;
   Data: any[] = [];
   abilityLevels: any = ['High', 'Medium', 'Low'];
   constructor(
@@ -28,21 +28,21 @@ export class PlayersPage implements OnInit {
         })
       }
     });
-    this.mainForm = this.formBuilder.group({
+    this.addPlayerForm = this.formBuilder.group({
       first_name: [''],
       last_name: [''],
       ability_level: ['']
     })
   }
   async storeData() {
-    if(this.mainForm.valid){
+    if(this.addPlayerForm.valid){
       this.db.addPlayer(
-        this.mainForm.value.first_name,
-        this.mainForm.value.last_name,
-        this.mainForm.value.ability_level
+        this.addPlayerForm.value.first_name,
+        this.addPlayerForm.value.last_name,
+        this.addPlayerForm.value.ability_level
 
       ).then((res) => {
-        this.mainForm.reset();
+        this.addPlayerForm.reset();
       })
     }
     else{

@@ -1,31 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-    </ion-buttons>
     <ion-title class="ion-text-center">Matches</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-list lines="full">
-    <form [formGroup]="matchesForm" (ngSubmit)="checkLogin()">
-      <ion-item>
-        <ion-label position="floating">Username</ion-label>
-        <ion-input formControlName="username" type="text" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Password</ion-label>
-        <ion-input formControlName="password" type="text" required>
-        </ion-input>
-      </ion-item>
-   
-      <ion-row>
-        <ion-col>
-          <ion-button type="submit" color="primary" shape="full" expand="block">
-            Login
-          </ion-button>
-          <p id="validationText"></p>
-        </ion-col>
-      </ion-row>
-    </form>
+  <ion-list>
+    <ion-list-header>
+      Matches
+    </ion-list-header>
+    <ion-item lines="inset" *ngFor="let data of Data">
+      <ion-label>
+        <h5>{{data.player1_id}}</h5>
+        <h5>{{data.player2_id}}</h5>
+        <h5>{{data.player3_id}}</h5>
+        <h5>{{data.player4_id}}</h5>
+        <p>{{data.team1_score}}</p>
+        <p>{{data.team2_score}}</p>
+      </ion-label>
+    </ion-item>
   </ion-list>
 </ion-content>

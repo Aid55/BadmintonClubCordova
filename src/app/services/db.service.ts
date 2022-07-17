@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Player } from './player';
+import { Match } from './match';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
@@ -12,6 +13,7 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 export class DbService {
   private storage: SQLiteObject;
   playersList = new BehaviorSubject([]);
+  matchesList = new BehaviorSubject([]);
   private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
   constructor(
     private platform: Platform, 
@@ -50,6 +52,7 @@ export class DbService {
         this.sqlPorter.importSqlToDb(this.storage, data)
           .then(_ => {
             this.getPlayers();
+            this.getMatches();
             this.isDbReady.next(true);
           })
           .catch(error => console.error(error));
@@ -110,5 +113,29 @@ export class DbService {
 
   checkLogin(username){
     return this.storage.executeSql('SELECT * FROM credentialstable WHERE username = ?', [username]);
+  }
+
+  fetchMatches(): Observable<Match[]> {
+    return this.matchesList.asObservable();
+  }
+
+  getMatches(){
+    return this.storage.executeSql('SELECT * FROM matchestable', []).then(res => {
+      let items: Match[] = [];
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++) { 
+          items.push({ 
+            id: res.rows.item(i).id,
+            player1_id: res.rows.item(i).player1_id,  
+            player2_id: res.rows.item(i).player2_id, 
+            player3_id: res.rows.item(i).player3_id,  
+            player4_id: res.rows.item(i).player4_id, 
+            team1_score: res.rows.item(i).team1_score, 
+            team2_score: res.rows.item(i).team2_score
+           });
+        }
+      }
+      this.matchesList.next(items);
+    });
   }
 }

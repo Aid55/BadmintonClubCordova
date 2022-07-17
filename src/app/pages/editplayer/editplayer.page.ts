@@ -10,7 +10,7 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./editplayer.page.scss'],
 })
 export class EditPlayerPage implements OnInit {
-  editForm: FormGroup;
+  editPlayerForm: FormGroup;
   id: any;
   abilityLevels: any = ['High', 'Medium', 'Low'];
   constructor(
@@ -22,7 +22,7 @@ export class EditPlayerPage implements OnInit {
   ) {
     this.id = this.actRoute.snapshot.paramMap.get('id');
     this.db.getPlayer(this.id).then(res => {
-      this.editForm.setValue({
+      this.editPlayerForm.setValue({
         first_name: res['first_name'],
         last_name: res['last_name'],
         ability_level: res['ability_level']
@@ -30,15 +30,15 @@ export class EditPlayerPage implements OnInit {
     })
   }
   ngOnInit() {
-    this.editForm = this.formBuilder.group({
+    this.editPlayerForm = this.formBuilder.group({
       first_name: [''],
       last_name: [''],
       ability_level: ['']
     })
   }
   async saveForm(){
-    if(this.editForm.valid){
-      this.db.updatePlayer(this.id, this.editForm.value)
+    if(this.editPlayerForm.valid){
+      this.db.updatePlayer(this.id, this.editPlayerForm.value)
       .then( (res) => {
         console.log(res)
         this.router.navigate(['/players']);

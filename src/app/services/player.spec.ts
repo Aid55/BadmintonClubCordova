@@ -1,7 +1,7 @@
-import { Player } from './player';
+import { Match } from './match';
 
-describe('Player', () => {
+describe('Match', () => {
   it('should create an instance', () => {
-    expect(new Player()).toBeTruthy();
+    expect(new Match()).toBeTruthy();
   });
 });
