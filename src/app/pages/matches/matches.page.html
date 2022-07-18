@@ -6,17 +6,40 @@
 <ion-content>
   <ion-list>
     <ion-list-header>
-      Matches
+      Current Matches
     </ion-list-header>
-    <ion-item lines="inset" *ngFor="let data of Data">
-      <ion-label>
-        <h5>{{data.player1_id}}</h5>
-        <h5>{{data.player2_id}}</h5>
-        <h5>{{data.player3_id}}</h5>
-        <h5>{{data.player4_id}}</h5>
-        <p>{{data.team1_score}}</p>
-        <p>{{data.team2_score}}</p>
-      </ion-label>
+    <ion-item class="matchItem" lines="full" *ngFor="let data of Data">
+      <ion-grid>
+        <ion-row>
+          <ion-col>        
+            <p class="playerName">{{data.player1_name}}</p>
+          </ion-col>
+          <ion-col>
+            <p class="playerName">{{data.player2_name}}</p>
+          </ion-col>
+          <ion-col>
+            <h5 class="scoreText">{{data.team1_score}}</h5>
+          </ion-col>
+          <ion-col>
+            <ion-icon name="create" style="zoom:3" [routerLink]="['/editscore/', data.id]"></ion-icon> 
+          </ion-col>
+        </ion-row>
+        <div id="vsText">VS</div>         
+        <ion-row>
+          <ion-col>      
+            <p class="playerName">{{data.player3_name}}</p>
+          </ion-col>
+          <ion-col>
+            <p class="playerName">{{data.player4_name}}</p>
+          </ion-col>
+          <ion-col>
+            <h5 class="scoreText">{{data.team2_score}}</h5>
+          </ion-col>
+          <ion-col>
+            <ion-icon name="checkbox-outline" style="zoom:3" (click)="editMatch(data.id)"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-item>
   </ion-list>
 </ion-content>

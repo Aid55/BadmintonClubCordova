@@ -1,3 +1,23 @@
 #validationText {
   color: red;
 }
+.matchItem{
+  border-color: black;
+  border-width: 0.1em;
+  border-style: solid;
+  margin-bottom: 2px;
+}
+
+.playerName{
+  font-size: 14px;
+  text-align: center;
+}
+
+#vsText{
+  font-size: 14px;
+  padding-left:5em;
+}
+
+.scoreText{
+  text-align: center;
+}

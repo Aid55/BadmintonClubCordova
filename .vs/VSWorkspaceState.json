@@ -4,7 +4,6 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\pages",
-    "\\src\\app\\pages\\editscore",
     "\\src\\app\\pages\\home",
     "\\src\\app\\pages\\leaderboard",
     "\\src\\app\\pages\\matches",
@@ -12,6 +11,6 @@
     "\\src\\assets",
     "\\src\\assets\\icon"
   ],
-  "SelectedNode": "\\src\\app\\pages\\editscore\\editscore.module.ts",
+  "SelectedNode": "\\config.xml",
   "PreviewInSolutionExplorer": false
 }

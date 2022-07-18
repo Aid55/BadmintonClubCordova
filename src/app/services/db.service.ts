@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -115,24 +116,36 @@ export class DbService {
     return this.storage.executeSql('SELECT * FROM credentialstable WHERE username = ?', [username]);
   }
 
-  fetchMatches(): Observable<Match[]> {
+  fetchMatches(): Observable<any[]> {
     return this.matchesList.asObservable();
   }
 
   getMatches(){
     return this.storage.executeSql('SELECT * FROM matchestable', []).then(res => {
-      let items: Match[] = [];
+      let items: any[] = [];
+      var p1, p2, p3, p4;
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) { 
-          items.push({ 
-            id: res.rows.item(i).id,
-            player1_id: res.rows.item(i).player1_id,  
-            player2_id: res.rows.item(i).player2_id, 
-            player3_id: res.rows.item(i).player3_id,  
-            player4_id: res.rows.item(i).player4_id, 
-            team1_score: res.rows.item(i).team1_score, 
-            team2_score: res.rows.item(i).team2_score
-           });
+          let matchId = res.rows.item(i).id;
+          let team1Score = res.rows.item(i).team1_score;
+          let team2Score = res.rows.item(i).team2_score;
+          Promise.all([
+            this.getPlayer(res.rows.item(i).player1_id).then(res1 => {p1 = res1.first_name + " " + res1.last_name}),
+            this.getPlayer(res.rows.item(i).player2_id).then(res1 => {p2 = res1.first_name + " " + res1.last_name}),
+            this.getPlayer(res.rows.item(i).player3_id).then(res1 => {p3 = res1.first_name + " " + res1.last_name}),
+            this.getPlayer(res.rows.item(i).player4_id).then(res1 => {p4 = res1.first_name + " " + res1.last_name})
+          ]).then(res2 => {
+            items.push({ 
+              id: matchId,
+              player1_name: p1,  
+              player2_name: p2, 
+              player3_name: p3,  
+              player4_name: p4, 
+              team1_score: team1Score, 
+              team2_score: team2Score
+            });
+          });
+          
         }
       }
       this.matchesList.next(items);
