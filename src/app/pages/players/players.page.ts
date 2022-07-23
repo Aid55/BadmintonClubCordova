@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
 export class PlayersPage implements OnInit {
   addPlayerForm: FormGroup;
   Data: any[] = [];
-  abilityLevels: any = ['High', 'Medium', 'Low'];
+  abilityLevels: any = ['Experienced', 'Intermediate', 'Beginner'];
   constructor(
     private db: DbService,
     public formBuilder: FormBuilder,

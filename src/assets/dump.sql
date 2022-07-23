@@ -4,14 +4,14 @@ CREATE TABLE IF NOT EXISTS playerstable(
     last_name TEXT NOT NULL,
     ability_level TEXT NOT NULL    
 );
-INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (1, "Aidan", "Batchelor", "Medium");
-INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (2, "Naomi", "Smith", "Medium");
-INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (3, "Joe", "Bloggs", "High");
-INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (4, "Jane", "Doe", "Low");
-INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (5, "Rosie", "Smith", "Medium");
-INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (6, "Simon", "Johnson", "Medium");
-INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (7, "Nathan", "Hall", "High");
-INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (8, "Susan", "Richard", "Low");
+INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (1, "Aidan", "Batchelor", "Intermediate");
+INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (2, "Naomi", "Smith", "Intermediate");
+INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (3, "Joe", "Bloggs", "Experienced");
+INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (4, "Jane", "Doe", "Beginner");
+INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (5, "Rosie", "Smith", "Intermediate");
+INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (6, "Simon", "Johnson", "Intermediate");
+INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (7, "Nathan", "Hall", "Experienced");
+INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level) VALUES (8, "Susan", "Richard", "Beginner");
 
 CREATE TABLE IF NOT EXISTS credentialstable(
     username TEXT NOT NULL,

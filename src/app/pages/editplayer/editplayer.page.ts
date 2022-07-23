@@ -12,7 +12,7 @@ import { ToastController } from '@ionic/angular';
 export class EditPlayerPage implements OnInit {
   editPlayerForm: FormGroup;
   id: any;
-  abilityLevels: any = ['High', 'Medium', 'Low'];
+  abilityLevels: any = ['Experienced', 'Intermediate', 'Beginner'];
   constructor(
     private db: DbService,
     private router: Router,
