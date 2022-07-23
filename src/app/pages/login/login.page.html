@@ -1,11 +1,9 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-    </ion-buttons>
-    <ion-title class="ion-text-center">Login Page</ion-title>
-  </ion-toolbar>
+  
 </ion-header>
 <ion-content>
+  <ion-img id="logo-img" src="..\..\assets\MyBadmintonClub-logos.jpeg"></ion-img>
+  <ion-title id="login-title">Please Login</ion-title>
   <ion-list lines="full">
     <form [formGroup]="loginForm" (ngSubmit)="checkLogin()">
       <ion-item>

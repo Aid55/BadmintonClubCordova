@@ -1,11 +1,11 @@
 <ion-app>
   <ion-buttons slot="start">
-    <ion-menu-button></ion-menu-button>
+    <ion-menu-button id="menu-button"></ion-menu-button>
   </ion-buttons>
   <ion-menu side="start" menuId="first" contentId="side-menu-content">
     <ion-header>
-      <ion-toolbar>
-        <ion-title>MyBadmintonClub</ion-title>
+      <ion-toolbar id="side-menu-toolbar">
+        <ion-title class="ion-text-center">MyBadmintonClub</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
@@ -20,5 +20,4 @@
     </ion-content>
   </ion-menu>
   <ion-router-outlet id="side-menu-content"></ion-router-outlet>
-  <ion-router-outlet></ion-router-outlet>
 </ion-app>

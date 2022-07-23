@@ -11,6 +11,6 @@
     "\\src\\assets",
     "\\src\\assets\\icon"
   ],
-  "SelectedNode": "\\config.xml",
+  "SelectedNode": "\\src\\app\\pages\\home\\home.page.ts",
   "PreviewInSolutionExplorer": false
 }
