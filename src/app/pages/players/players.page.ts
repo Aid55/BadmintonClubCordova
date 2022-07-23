@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder} from "@angular/forms";
 import { DbService } from '../../services/db.service';
-import { ToastController } from '@ionic/angular';
+import { MenuController, ToastController } from '@ionic/angular';
 import { Router } from "@angular/router";
 @Component({
   selector: 'app-players',
@@ -17,10 +17,16 @@ export class PlayersPage implements OnInit {
     private db: DbService,
     public formBuilder: FormBuilder,
     private toast: ToastController,
-    private router: Router
+    private router: Router,
+    private menuCtrl: MenuController
   ) { }
 
+  ionViewWillEnter(){
+    this.menuCtrl.enable(true);
+  }
+
   ngOnInit() {
+    this.menuCtrl.enable(true);
     this.db.dbState().subscribe((res) => {
       if(res){
         this.db.fetchPlayers().subscribe(item => {

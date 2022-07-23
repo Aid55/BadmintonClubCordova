@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { DbService } from '../../services/db.service'
 import { ActivatedRoute, Router } from "@angular/router";
-import { ToastController } from '@ionic/angular';
+import { MenuController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-editplayer',
@@ -18,7 +18,8 @@ export class EditPlayerPage implements OnInit {
     private router: Router,
     public formBuilder: FormBuilder,
     private actRoute: ActivatedRoute,
-    private toast:ToastController
+    private toast:ToastController,
+    private menuCtrl: MenuController
   ) {
     this.id = this.actRoute.snapshot.paramMap.get('id');
     this.db.getPlayer(this.id).then(res => {
@@ -29,6 +30,11 @@ export class EditPlayerPage implements OnInit {
       })
     })
   }
+
+  ionViewWillEnter(){
+    this.menuCtrl.enable(false);
+  }
+
   ngOnInit() {
     this.editPlayerForm = this.formBuilder.group({
       first_name: [''],

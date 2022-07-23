@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { DbService } from '../../services/db.service';
-import { ToastController } from '@ionic/angular';
+import { MenuController, ToastController } from '@ionic/angular';
 import { Router } from "@angular/router";
 
 @Component({
@@ -16,10 +16,12 @@ export class LoginPage implements OnInit {
     private db: DbService,
     public formBuilder: FormBuilder,
     private toast: ToastController,
-    private router: Router
+    private router: Router,
+    private menuCtrl: MenuController
   ) { }
 
   ngOnInit() {
+    this.menuCtrl.enable(false, "first");
     
     this.loginForm = this.formBuilder.group({
       username: ['aidan'],

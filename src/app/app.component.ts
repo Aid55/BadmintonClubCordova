@@ -14,11 +14,11 @@ export class AppComponent {
   initSideMenuNavigation(){
     this.navigation =
     [
-      {
+      /*{
         title : "Login",
         url   : "/login",
         icon  : "log-in-outline"
-      },
+      },*/
       {
         title : "Home",
         url   : "/home",
