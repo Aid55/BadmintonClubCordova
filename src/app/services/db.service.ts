@@ -125,7 +125,7 @@ export class DbService {
       let items: any[] = [];
       var p1, p2, p3, p4;
       if (res.rows.length > 0) {
-        for (var i = 0; i < res.rows.length; i++) { 
+        for (var i = 0; i < res.rows.length; i++) {
           let matchId = res.rows.item(i).id;
           let team1Score = res.rows.item(i).team1_score;
           let team2Score = res.rows.item(i).team2_score;
@@ -145,7 +145,6 @@ export class DbService {
               team2_score: team2Score
             });
           });
-          
         }
       }
       this.matchesList.next(items);
