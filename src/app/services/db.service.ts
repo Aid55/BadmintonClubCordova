@@ -65,12 +65,15 @@ export class DbService {
       let items: Player[] = [];
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) { 
-          items.push({ 
-            id: res.rows.item(i).id,
-            first_name: res.rows.item(i).first_name,  
-            last_name: res.rows.item(i).last_name,
-            ability_level: res.rows.item(i).ability_level
-           });
+          if(res.rows.item(i).id != 0){
+            items.push({ 
+              id: res.rows.item(i).id,
+              first_name: res.rows.item(i).first_name,  
+              last_name: res.rows.item(i).last_name,
+              ability_level: res.rows.item(i).ability_level,
+              assigned_to_match: res.rows.item(i).assigned_to_match
+            });
+          }
         }
       }
       this.playersList.next(items);
@@ -78,8 +81,8 @@ export class DbService {
   }
   // Add
   addPlayer(first_name, last_name, ability_level) {
-    let data = [first_name, last_name, ability_level];
-    return this.storage.executeSql('INSERT INTO playerstable (first_name, last_name, ability_level) VALUES (?, ?, ?)', data)
+    let data = [first_name, last_name, ability_level, 0];
+    return this.storage.executeSql('INSERT INTO playerstable (first_name, last_name, ability_level, assigned_to_match) VALUES (?, ?, ?)', data)
     .then(res => {
       this.getPlayers();
     });
@@ -92,7 +95,8 @@ export class DbService {
         id: res.rows.item(0).id,
         first_name: res.rows.item(0).first_name,  
         last_name: res.rows.item(0).last_name,
-        ability_level: res.rows.item(0).ability_level
+        ability_level: res.rows.item(0).ability_level,
+        assigned_to_match: res.rows.item(0).assigned_to_match
       }
     });
   }
