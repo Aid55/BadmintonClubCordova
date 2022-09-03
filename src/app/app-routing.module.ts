@@ -20,8 +20,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/editplayer/editplayer.module').then( m => m.EditPlayerPageModule)
   },
   {
-    path: 'editscore/:id',
-    loadChildren: () => import('./pages/editscore/editscore.module').then( m => m.EditScorePageModule)
+    path: 'editmatch/:id',
+    loadChildren: () => import('./pages/editmatch/editmatch.module').then( m => m.EditMatchPageModule)
   },
   {
     path: 'matches',

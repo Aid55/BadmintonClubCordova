@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-buttons style="color:white" slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Edit Match</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list lines="full">
+    <form [formGroup]="editMatchForm" (ngSubmit)="saveForm()">
+      <ion-item>
+        <ion-label position="floating">Player 1</ion-label>
+        <ion-input formControlName="player1" type="text" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Player 2</ion-label>
+        <ion-input formControlName="player2" type="text" required>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Player 3</ion-label>
+        <ion-input formControlName="player3" type="text" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Player 4</ion-label>
+        <ion-input formControlName="player4" type="text" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Team 1 Score</ion-label>
+        <ion-input formControlName="team1_score" type="text" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Team 2 Score</ion-label>
+        <ion-input formControlName="team2_score" type="text" required></ion-input>
+      </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="primary" shape="full" expand="block">
+            Update Match
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+</ion-content>

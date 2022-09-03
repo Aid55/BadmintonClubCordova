@@ -124,27 +124,44 @@ export class DbService {
     return this.matchesList.asObservable();
   }
 
+   // Get single object
+   getMatch(id): Promise<Match> {
+    return this.storage.executeSql('SELECT * FROM matchestable WHERE id = ?', [id]).then(res => { 
+      return {
+        id: res.rows.item(0).id,
+        player1_id: res.rows.item(0).player1_id,
+        player2_id: res.rows.item(0).player2_id, 
+        player3_id: res.rows.item(0).player3_id, 
+        player4_id: res.rows.item(0).player4_id,   
+        team1_score: res.rows.item(0).team1_score,
+        team2_score: res.rows.item(0).team2_score,
+      }
+    });
+  }
+  // Update
+  updateMatch(id, match: Match) {
+    let data = [match.player1_id, match.player2_id, match.player3_id, match.player4_id, match.team1_score, match.team2_score];
+    return this.storage.executeSql(`UPDATE matchestable SET player1_id = ?, player2_id = ?, player3_id = ?, player4_id = ?, team1_score = ?, team2_score = ? WHERE id = ${id}`, data)
+    .then(data => {
+      this.getMatches();
+    })
+  }
+
   getMatches(){
     return this.storage.executeSql('SELECT * FROM matchestable', []).then(res => {
       let items: any[] = [];
-      var p1, p2, p3, p4;
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) {
           let matchId = res.rows.item(i).id;
           let team1Score = res.rows.item(i).team1_score;
           let team2Score = res.rows.item(i).team2_score;
-          Promise.all([
-            this.getPlayer(res.rows.item(i).player1_id).then(res1 => {p1 = res1.first_name + " " + res1.last_name}),
-            this.getPlayer(res.rows.item(i).player2_id).then(res1 => {p2 = res1.first_name + " " + res1.last_name}),
-            this.getPlayer(res.rows.item(i).player3_id).then(res1 => {p3 = res1.first_name + " " + res1.last_name}),
-            this.getPlayer(res.rows.item(i).player4_id).then(res1 => {p4 = res1.first_name + " " + res1.last_name})
-          ]).then(res2 => {
+          this.getPlayersInMatch(res.rows.item(i).player1_id, res.rows.item(i).player2_id, res.rows.item(i).player3_id, res.rows.item(i).player4_id).then(res2 => {
             items.push({ 
               id: matchId,
-              player1_name: p1,  
-              player2_name: p2, 
-              player3_name: p3,  
-              player4_name: p4, 
+              player1_name: res2.player1_name,  
+              player2_name: res2.player2_name, 
+              player3_name: res2.player3_name,  
+              player4_name: res2.player4_name, 
               team1_score: team1Score, 
               team2_score: team2Score
             });
@@ -152,6 +169,22 @@ export class DbService {
         }
       }
       this.matchesList.next(items);
+    });
+  }
+
+  getPlayersInMatch(player1_id, player2_id, player3_id, player4_id){
+    return Promise.all([
+      this.getPlayer(player1_id),
+      this.getPlayer(player2_id),
+      this.getPlayer(player3_id),
+      this.getPlayer(player4_id)
+    ]).then(res1 => {
+      return{
+        player1_name: res1[0].first_name + " " + res1[0].last_name,
+        player2_name: res1[1].first_name + " " + res1[1].last_name,
+        player3_name: res1[2].first_name + " " + res1[2].last_name,
+        player4_name: res1[3].first_name + " " + res1[3].last_name
+      }
     });
   }
 }

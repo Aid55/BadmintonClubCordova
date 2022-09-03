@@ -27,7 +27,6 @@ export class MatchesPage implements OnInit {
       if(res){
         this.db.fetchMatches().subscribe(item => {
           this.Data = item
-          console.log({item});
         })
       }
     });

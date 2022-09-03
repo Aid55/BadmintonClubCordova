@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { IonicModule } from '@ionic/angular';
 
-import { EditScorePageRoutingModule } from './editscore-routing.module';
+import { EditMatchPageRoutingModule } from './editmatch-routing.module';
 
-import { EditScorePage } from './editscore.page';
+import { EditMatchPage } from './editmatch.page';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -13,10 +13,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     IonicModule,
-    EditScorePageRoutingModule,
+    EditMatchPageRoutingModule,
     ReactiveFormsModule,
     FormsModule
   ],
-  declarations: [EditScorePage]
+  declarations: [EditMatchPage]
 })
-export class EditScorePageModule {}
+export class EditMatchPageModule {}
