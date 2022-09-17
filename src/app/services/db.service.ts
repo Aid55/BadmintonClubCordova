@@ -15,6 +15,7 @@ export class DbService {
   private storage: SQLiteObject;
   playersList = new BehaviorSubject([]);
   matchesList = new BehaviorSubject([]);
+  freePlayersList = new BehaviorSubject([]);
   private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
   constructor(
     private platform: Platform, 
@@ -54,6 +55,7 @@ export class DbService {
           .then(_ => {
             this.getPlayers();
             this.getMatches();
+            this.getFreePlayers();
             this.isDbReady.next(true);
           })
           .catch(error => console.error(error));
@@ -82,9 +84,10 @@ export class DbService {
   // Add
   addPlayer(first_name, last_name, ability_level) {
     let data = [first_name, last_name, ability_level, 0];
-    return this.storage.executeSql('INSERT INTO playerstable (first_name, last_name, ability_level, assigned_to_match) VALUES (?, ?, ?)', data)
+    return this.storage.executeSql('INSERT INTO playerstable (first_name, last_name, ability_level, assigned_to_match) VALUES (?, ?, ?, ?)', data)
     .then(res => {
       this.getPlayers();
+      this.getFreePlayers();
     });
   }
  
@@ -158,10 +161,10 @@ export class DbService {
           this.getPlayersInMatch(res.rows.item(i).player1_id, res.rows.item(i).player2_id, res.rows.item(i).player3_id, res.rows.item(i).player4_id).then(res2 => {
             items.push({ 
               id: matchId,
-              player1_name: res2.player1_name,  
-              player2_name: res2.player2_name, 
-              player3_name: res2.player3_name,  
-              player4_name: res2.player4_name, 
+              player1_name: res2.player1.first_name+" "+res2.player1.last_name,  
+              player2_name: res2.player2.first_name+" "+res2.player2.last_name, 
+              player3_name: res2.player3.first_name+" "+res2.player3.last_name,  
+              player4_name: res2.player4.first_name+" "+res2.player4.last_name, 
               team1_score: team1Score, 
               team2_score: team2Score
             });
@@ -180,11 +183,50 @@ export class DbService {
       this.getPlayer(player4_id)
     ]).then(res1 => {
       return{
-        player1_name: res1[0].first_name + " " + res1[0].last_name,
-        player2_name: res1[1].first_name + " " + res1[1].last_name,
-        player3_name: res1[2].first_name + " " + res1[2].last_name,
-        player4_name: res1[3].first_name + " " + res1[3].last_name
+        player1: res1[0],
+        player2: res1[1],
+        player3: res1[2],
+        player4: res1[3]
       }
     });
   }
+
+  fetchFreePlayers(): Observable<Player[]> {
+    return this.freePlayersList.asObservable();
+  }
+
+  getFreePlayers(){
+    return this.storage.executeSql('SELECT * FROM playerstable WHERE assigned_to_match = ?', [0]).then(res => {
+      let items: Player[] = [];
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++) { 
+          items.push({ 
+            id: res.rows.item(i).id,
+            first_name: res.rows.item(i).first_name,  
+            last_name: res.rows.item(i).last_name,
+            ability_level: res.rows.item(i).ability_level,
+            assigned_to_match: res.rows.item(i).assigned_to_match
+          });
+        }
+      }
+      this.freePlayersList.next(items);
+    });
+  }
+
+  playerIsFree(id){
+    return this.storage.executeSql(`UPDATE playerstable SET assigned_to_match = ? WHERE id = ${id}`, [0])
+    .then(data => {
+      this.getFreePlayers();
+    })
+  }
+
+  playerIsInGame(id){
+    if(id != 0){
+      return this.storage.executeSql(`UPDATE playerstable SET assigned_to_match = ? WHERE id = ${id}`, [1])
+      .then(data => {
+        this.getFreePlayers();
+      })
+    }
+  }
+
 }

@@ -8,23 +8,30 @@
 </ion-header>
 <ion-content>
   <ion-list lines="full">
-    <form [formGroup]="editMatchForm" (ngSubmit)="saveForm()">
+    <form [formGroup]="editMatchForm" (ionChange)="test()" (ngSubmit)="saveForm()">
       <ion-item>
-        <ion-label position="floating">Player 1</ion-label>
-        <ion-input formControlName="player1" type="text" required></ion-input>
+        <ion-label position="floating">Player 1</ion-label>  
+        <ion-select id="p1" formControlName="player1" type="text" required>
+          <ion-select-option value="{{player['id']}}" *ngFor="let player of freePlayers">{{player['first_name']+" "+player['last_name']}}</ion-select-option>
+        </ion-select>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Player 2</ion-label>
-        <ion-input formControlName="player2" type="text" required>
-        </ion-input>
+        <ion-select formControlName="player2" type="text" required>
+          <ion-select-option value="{{player['id']}}" *ngFor="let player of freePlayers">{{player['first_name']+" "+player['last_name']}}</ion-select-option>
+        </ion-select>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Player 3</ion-label>
-        <ion-input formControlName="player3" type="text" required></ion-input>
+        <ion-select formControlName="player3" type="text" required>
+          <ion-select-option value="{{player['id']}}" *ngFor="let player of freePlayers">{{player['first_name']+" "+player['last_name']}}</ion-select-option>
+        </ion-select>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Player 4</ion-label>
-        <ion-input formControlName="player4" type="text" required></ion-input>
+        <ion-select formControlName="player4" type="text" required>
+          <ion-select-option value="{{player['id']}}" *ngFor="let player of freePlayers">{{player['first_name']+" "+player['last_name']}}</ion-select-option>
+        </ion-select>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Team 1 Score</ion-label>

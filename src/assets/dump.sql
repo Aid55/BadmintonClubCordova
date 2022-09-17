@@ -17,7 +17,7 @@ INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level, ass
 INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level, assigned_to_match) VALUES (10, "Sharon", "Stevens", "Intermediate", 0);
 INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level, assigned_to_match) VALUES (11, "Karen", "Bell", "Experienced", 0);
 INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level, assigned_to_match) VALUES (12, "John", "Bury", "Beginner", 0);
-INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level, assigned_to_match) VALUES (0, "Empty", "Space", "Beginner", 1);
+INSERT or IGNORE INTO playerstable(id, first_name, last_name, ability_level, assigned_to_match) VALUES (0, "Empty", "Space", "Beginner", 0);
 
 CREATE TABLE IF NOT EXISTS credentialstable(
     username TEXT NOT NULL,
@@ -40,5 +40,5 @@ CREATE TABLE IF NOT EXISTS matchestable(
 );
 INSERT or IGNORE INTO matchestable(id, player1_id, player2_id, player3_id, player4_id, team1_score, team2_score) VALUES (1, 1, 2, 3, 4, 21, 19);
 INSERT or IGNORE INTO matchestable(id, player1_id, player2_id, player3_id, player4_id, team1_score, team2_score) VALUES (2, 0, 0, 0, 0, 0, 0);
-INSERT or IGNORE INTO matchestable(id, player1_id, player2_id, player3_id, player4_id, team1_score, team2_score) VALUES (3, 9, 10, 11, 12, 5, 21);
+INSERT or IGNORE INTO matchestable(id, player1_id, player2_id, player3_id, player4_id, team1_score, team2_score) VALUES (3, 5, 6, 7, 8, 5, 21);
 INSERT or IGNORE INTO matchestable(id, player1_id, player2_id, player3_id, player4_id, team1_score, team2_score) VALUES (4, 0, 0, 0, 0, 0, 0);
