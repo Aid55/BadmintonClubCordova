@@ -42,3 +42,17 @@ INSERT or IGNORE INTO matchestable(id, player1_id, player2_id, player3_id, playe
 INSERT or IGNORE INTO matchestable(id, player1_id, player2_id, player3_id, player4_id, team1_score, team2_score) VALUES (2, 0, 0, 0, 0, 0, 0);
 INSERT or IGNORE INTO matchestable(id, player1_id, player2_id, player3_id, player4_id, team1_score, team2_score) VALUES (3, 5, 6, 7, 8, 5, 21);
 INSERT or IGNORE INTO matchestable(id, player1_id, player2_id, player3_id, player4_id, team1_score, team2_score) VALUES (4, 0, 0, 0, 0, 0, 0);
+
+CREATE TABLE IF NOT EXISTS prevmatchestable(
+    id INTEGER PRIMARY KEY,
+    player1_id INTEGER,
+    player2_id INTEGER,
+    player3_id INTEGER,
+    player4_id INTEGER,
+    team1_score INTEGER NOT NULL,
+    team2_score INTEGER NOT NULL,
+    FOREIGN KEY (player1_id) REFERENCES playerstable(id),
+    FOREIGN KEY (player2_id) REFERENCES playerstable(id),
+    FOREIGN KEY (player3_id) REFERENCES playerstable(id),
+    FOREIGN KEY (player4_id) REFERENCES playerstable(id)
+);

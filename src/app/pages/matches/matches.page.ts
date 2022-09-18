@@ -16,6 +16,7 @@ export class MatchesPage implements OnInit {
     private toast: ToastController,
     private router: Router,
     private menuCtrl: MenuController
+
   ) { }
 
   ionViewWillEnter(){
@@ -30,5 +31,27 @@ export class MatchesPage implements OnInit {
         })
       }
     });
+  }
+
+  saveMatch(id){
+    this.db.getMatch(id).then(async(data) => {
+      if(data.player1_id != 0 && data.player2_id != 0 && data.player3_id != 0 && data.player4_id != 0 && (data.team1_score == 21 || data.team2_score == 21)){
+        this.db.saveMatch(id).then(async(res) => {
+          let toast = await this.toast.create({
+            message: 'Match Saved',
+            duration: 2500
+          });
+          toast.present();      
+        });
+      }
+      else{
+        let toast = await this.toast.create({
+          message: 'Match must contain 4 players and a score of 21 to save',
+          duration: 2500
+        });
+        toast.present();   
+      }
+    });
+
   }
 }

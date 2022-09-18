@@ -127,8 +127,12 @@ export class DbService {
     return this.matchesList.asObservable();
   }
 
+  addMatch(){
+    return this.storage.executeSql('INSERT INTO matchestable (player1_id, player2_id, player3_id, player4_id, team1_score, team2_score) VALUES (?, ?, ?, ?, ?, ?)', [0, 0, 0, 0, 0, 0]);
+  }
+
    // Get single object
-   getMatch(id): Promise<Match> {
+  getMatch(id): Promise<Match> {
     return this.storage.executeSql('SELECT * FROM matchestable WHERE id = ?', [id]).then(res => { 
       return {
         id: res.rows.item(0).id,
@@ -227,6 +231,22 @@ export class DbService {
         this.getFreePlayers();
       })
     }
+  }
+
+  saveMatch(id){
+    return this.getMatch(id)
+    .then(res => {
+      this.playerIsFree(res.player1_id);
+      this.playerIsFree(res.player2_id);
+      this.playerIsFree(res.player3_id);
+      this.playerIsFree(res.player4_id);
+      return this.storage.executeSql('DELETE FROM matchestable WHERE id = ?', [id]).then(res2 => {
+        this.addMatch();
+        this.getFreePlayers();
+        this.getMatches();
+      });
+    });
+    
   }
 
 }
